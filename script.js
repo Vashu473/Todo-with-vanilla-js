@@ -86,11 +86,11 @@ const handleAdd = () => {
     localStorage.setItem("list", JSON.stringify([...allList, value]));
     input.value = "";
   }
+  window.location.reload();
 };
 const handleDelete = (data) => {
   let id = Number(data.id);
   allList.splice(id, 1);
-  console.log(allList);
   localStorage.setItem("list", JSON.stringify(allList));
   window.location.reload();
 };

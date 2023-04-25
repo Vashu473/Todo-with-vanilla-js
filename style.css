@@ -12,7 +12,6 @@
 }
 
 #inp {
-  width: 400px;
   border-radius: 10px;
 }
 
@@ -25,12 +24,13 @@
 #basic-addon2 {
   margin: 6px 0px 10px -90px;
   z-index: 3;
-  border-radius: 14px;
+  border-radius: 8px;
 }
 
-#card {
+.list-card {
   width: 410px;
   border-radius: 5px;
+  min-height: 300px;
 }
 
 .icon {

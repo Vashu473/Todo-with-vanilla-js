@@ -1,6 +1,5 @@
 //1. catching body tag--------
 const body = document.querySelector("body");
-
 //2. creating a container---------
 const container = document.createElement("div");
 container.setAttribute(
@@ -42,6 +41,7 @@ div.setAttribute("class", "d-flex bg-white px-3 py-5 flex-column list-card");
 
 //6. create list items
 const createListItems = (text) => {
+  let length = document.querySelectorAll("i")?.length || 0;
   //   creating a div
   const innerDiv = document.createElement("div");
   // setting classes
@@ -59,6 +59,7 @@ const createListItems = (text) => {
   const icon = document.createElement("i");
   //   setting classes
   icon.setAttribute("class", "fa-solid fa-trash-can icon");
+  icon.setAttribute("id", `${length}`);
   //   arranging elements
   innerDiv.appendChild(p);
   innerDiv.appendChild(icon);
@@ -70,6 +71,32 @@ body.appendChild(container);
 container.appendChild(heading);
 container.appendChild(inpDiv);
 container.appendChild(div);
-createListItems("hello vashu");
 
 // adding logic
+const allList = JSON.parse(localStorage.getItem("list")) || [];
+allList.forEach((data) => {
+  createListItems(data);
+});
+const allIcon = document.querySelectorAll("i");
+
+const handleAdd = () => {
+  let value = input.value;
+  if (value.length) {
+    createListItems(value);
+    localStorage.setItem("list", JSON.stringify([...allList, value]));
+    input.value = "";
+  }
+};
+const handleDelete = (data) => {
+  let id = Number(data.id);
+  allList.splice(id, 1);
+  console.log(allList);
+  localStorage.setItem("list", JSON.stringify(allList));
+  window.location.reload();
+};
+
+button.addEventListener("click", handleAdd);
+
+allIcon.forEach((data) => {
+  data.addEventListener("click", () => handleDelete(data));
+});
